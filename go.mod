@@ -1,3 +1,3 @@
-module Squery
+module github.com/Karthik-HR0/Sqry
 
-go 1.20
+go 1.19
