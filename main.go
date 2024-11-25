@@ -40,7 +40,7 @@ func main() {
     
     userAgent := userAgents[rand.Intn(len(userAgents))]
 
-    // Create HTTP client and request
+   
     client := &http.Client{}
     req, err := http.NewRequest("GET", baseURL, nil)
     if err != nil {
@@ -66,7 +66,7 @@ func main() {
     ipRegex := regexp.MustCompile(`\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b`)
     ips := ipRegex.FindAllString(string(body), -1)
 
-    // Filter out private and reserved IPs
+   
     var filteredIPs []string
     for _, ip := range ips {
         if !isPrivateOrReservedIP(ip) {
