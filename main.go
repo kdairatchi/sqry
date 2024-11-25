@@ -37,7 +37,7 @@ func main() {
     encodedQuery := url.QueryEscape(query)
     baseURL := fmt.Sprintf("https://www.shodan.io/search/facet?query=%s&facet=ip", encodedQuery)
 
-    // Select random user agent
+    
     userAgent := userAgents[rand.Intn(len(userAgents))]
 
     // Create HTTP client and request
@@ -74,7 +74,7 @@ func main() {
         }
     }
 
-    // Remove duplicates and print
+    
     uniqueIPs := removeDuplicates(filteredIPs)
     for _, ip := range uniqueIPs {
         fmt.Println(ip)
