@@ -1,6 +1,6 @@
 <h1 align="center">sqry</h1>
 
-> sqry is Shodan Query, that cook for you
+> sqry is Shodan Query
 
 `sqry extracts IPs from Shodan searches. just the IPs you need.`
 # Sqry
