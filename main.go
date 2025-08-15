@@ -57,6 +57,7 @@ func main() {
 			r.Domain = resolveDomain(ip)
 		}
 		if cfg.Ports || cfg.JSON || cveFlags.JoinCVEs || cfg.HTTPX {
+		if cfg.Ports || cfg.JSON || cveFlags.JoinCVEs {
 			ports, cpes := fetchPorts(ip)
 			r.Ports = ports
 			r.CPEs = cpes
@@ -189,6 +190,7 @@ func buildOutput(results []Result, cfg Config, cve *CVEFlags) string {
 			if cfg.HTTPX {
 				fields = append(fields, r.Title, r.Screenshot)
 			}
+
 			sb.WriteString(strings.Join(fields, "\t") + "\n")
 		}
 	case cfg.JSON:
@@ -207,6 +209,7 @@ func buildOutput(results []Result, cfg Config, cve *CVEFlags) string {
 			if cfg.HTTPX {
 				fields = append(fields, r.Title, r.Screenshot)
 			}
+
 			sb.WriteString(strings.Join(fields, ",") + "\n")
 		}
 	case cfg.Domains:
@@ -227,6 +230,7 @@ func buildOutput(results []Result, cfg Config, cve *CVEFlags) string {
 			if cfg.HTTPX {
 				parts = append(parts, r.Title, r.Screenshot)
 			}
+
 			sb.WriteString(strings.Join(parts, "\t") + "\n")
 		}
 	}
