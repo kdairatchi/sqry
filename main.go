@@ -56,6 +56,7 @@ func main() {
 		if cfg.Domains || cfg.WithDomains || cfg.JSON || cfg.HasDomain {
 			r.Domain = resolveDomain(ip)
 		}
+		if cfg.Ports || cfg.JSON || cveFlags.JoinCVEs || cfg.HTTPX {
 		if cfg.Ports || cfg.JSON || cveFlags.JoinCVEs {
 			ports, cpes := fetchPorts(ip)
 			r.Ports = ports
@@ -100,6 +101,12 @@ func main() {
 
 	if cfg.Shuffle {
 		rand.Shuffle(len(results), func(i, j int) { results[i], results[j] = results[j], results[i] })
+	}
+
+	if cfg.HTTPX {
+		if err := runHTTPX(results); err != nil {
+			log.Printf("httpx: %v", err)
+		}
 	}
 
 	output := buildOutput(results, cfg, cveFlags)
@@ -180,6 +187,10 @@ func buildOutput(results []Result, cfg Config, cve *CVEFlags) string {
 			} else {
 				fields = append(fields, "", "", "", "")
 			}
+			if cfg.HTTPX {
+				fields = append(fields, r.Title, r.Screenshot)
+			}
+
 			sb.WriteString(strings.Join(fields, "\t") + "\n")
 		}
 	case cfg.JSON:
@@ -195,6 +206,10 @@ func buildOutput(results []Result, cfg Config, cve *CVEFlags) string {
 			if cfg.Ports && len(r.Ports) > 0 {
 				fields = append(fields, intsToCSV(r.Ports))
 			}
+			if cfg.HTTPX {
+				fields = append(fields, r.Title, r.Screenshot)
+			}
+
 			sb.WriteString(strings.Join(fields, ",") + "\n")
 		}
 	case cfg.Domains:
@@ -212,6 +227,10 @@ func buildOutput(results []Result, cfg Config, cve *CVEFlags) string {
 			if cfg.Geo && r.Country != "" {
 				parts = append(parts, r.Country)
 			}
+			if cfg.HTTPX {
+				parts = append(parts, r.Title, r.Screenshot)
+			}
+
 			sb.WriteString(strings.Join(parts, "\t") + "\n")
 		}
 	}

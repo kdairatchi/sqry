@@ -2,6 +2,19 @@ package main
 
 // Result represents enriched information about an IP address.
 type Result struct {
+	IP         string   `json:"ip"`
+	Domain     string   `json:"domain,omitempty"`
+	Org        string   `json:"org,omitempty"`
+	ASN        string   `json:"asn,omitempty"`
+	Country    string   `json:"country,omitempty"`
+	Ports      []int    `json:"ports,omitempty"`
+	Banner     string   `json:"banner,omitempty"`
+	CPEs       []string `json:"cpes,omitempty"`
+	Product    string   `json:"product,omitempty"`
+	Version    string   `json:"version,omitempty"`
+	TopCVE     *CVE     `json:"top_cve,omitempty"`
+	Title      string   `json:"title,omitempty"`
+	Screenshot string   `json:"screenshot,omitempty"`
 	IP      string   `json:"ip"`
 	Domain  string   `json:"domain,omitempty"`
 	Org     string   `json:"org,omitempty"`
