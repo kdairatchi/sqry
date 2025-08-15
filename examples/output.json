@@ -1,0 +1,20 @@
+[
+  {
+    "ip": "1.1.1.1",
+    "domain": "one.one.one.one",
+    "org": "Cloudflare, Inc.",
+    "asn": "AS13335",
+    "country": "US",
+    "ports": [80, 443],
+    "banner": ""
+  },
+  {
+    "ip": "8.8.8.8",
+    "domain": "dns.google",
+    "org": "Google LLC",
+    "asn": "AS15169",
+    "country": "US",
+    "ports": [53],
+    "banner": ""
+  }
+]
