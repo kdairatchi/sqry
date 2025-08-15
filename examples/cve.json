@@ -1,0 +1,10 @@
+[
+  {
+    "cve_id": "CVE-2016-10087",
+    "summary": "Example vulnerability summary",
+    "cvss": 7.5,
+    "epss": 0.01091,
+    "kev": true,
+    "published_time": "2016-11-01T00:00:00Z"
+  }
+]
