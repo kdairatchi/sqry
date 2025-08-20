@@ -1,0 +1,11 @@
+# Binary built from source
+sqry
+
+# Test binaries
+*.test
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
