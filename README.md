@@ -1,77 +1,41 @@
-<h1 align="center">sqry</h1>
+# sqry
 
-> sqry is Shodan Query
+sqry is a lightweight command-line tool written in Go that queries Shodan and extracts IPv4 addresses. It filters out private and reserved ranges, removes duplicates, and can optionally enrich results with domains, ports, geolocation, and CVE data.
 
-`sqry extracts IPs from Shodan searches. just the IPs you need.`
-# Sqry
-
-Sqry is a lightweight command-line tool written in Go that allows users to query Shodan for IP addresses based on a specific search query. It extracts IPv4 addresses from the Shodan results, filters out private or reserved IPs, removes duplicates, and outputs the clean list of public IPs.
-
-- Extract IPs from Shodan
+## Features
+- Extract IPs from Shodan searches
+- Filter out private and reserved ranges
 - Random User-Agent rotation
-- Clean, pipe-friendly output
-- Zero dependencies (just bash & curl)
+- Optional enrichment with domains, ports, ASN, country, and CVE information
+- HTTP probing via [httpx](https://github.com/projectdiscovery/httpx) for titles and screenshots
+- Output in plain text, CSV, or JSON
 
-- Fetches data directly from Shodan's search facet endpoint.
-- Uses a random User-Agent for each request to avoid detection.
-- Extracts and validates IPv4 addresses using regex.
-- Filters out private, reserved, and non-routable IP ranges.
-- Ensures unique IP addresses in the output.
-- A valid Shodan API query string (no API key required for this tool, as it scrapes public search result)
-
-<br>
-<br>
-
-`installation`
-> 
+## Installation
 ```bash
 go install github.com/Karthik-HR0/sqry@latest
 ```
 
-<br>
-<br>
+## Usage
+```bash
+sqry -q <query> [options]
+```
+Run `sqry -h` to view all available flags.
 
-`arguments`
-<pre>
-  -q   : Search query (required)
-</pre>
-
-<br>
-<br>
-
-`example commands`
+## Examples
 ```bash
-sqry -q "apache" > apache_ips.txt # Search for apache servers
-```
-```bash
-sqry -q 'org:\"Google LLC\"' # Search with organization filter
-```
-```bash
-sqry -q "port:443" | sort -u # Search with port filter
-```
-```bash
-sqry -q "apache" | xargs -I {} nmap -sV {} # Scan found IPs with nmap
-```
-```bash
-sqry -q "apache" | tee ips.txt | wc -l # Save to file and count results
-```
-```bash
-sqry -q "apache" | grep -v "^10\." > public_ips.txt # Filter and process results
+sqry -q "apache" --limit 10
+sqry -q "ssl:true" --domains --with-domains
+sqry -q "nginx" --json --country US --limit 5
+sqry -q "http" --httpx --limit 20
+sqry --cve CVE-2016-10087 --cve-json --pretty
 ```
 
-<br>
-<br>
+## Troubleshooting
+- Ensure your Shodan query syntax is valid
+- Confirm internet connectivity
+- The `httpx` option requires the `httpx` binary in your `PATH`
 
-`If you see no results`
-- Check your query syntax
-- Ensure you have curl installed
-- Check your internet connection
+## License
+[MIT](LICENSE)
 
-
-<br>
-<br>
-<br>
-<p align="center">
-Made with <3 by <a href="https://github.com/KARTHIK-HR0" >@Karthik-HR0</a>
-<br>
-</p>
+Made with ❤️ by [@Karthik-HR0](https://github.com/KARTHIK-HR0)
