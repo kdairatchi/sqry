@@ -57,7 +57,6 @@ func main() {
 			r.Domain = resolveDomain(ip)
 		}
 		if cfg.Ports || cfg.JSON || cveFlags.JoinCVEs || cfg.HTTPX {
-		if cfg.Ports || cfg.JSON || cveFlags.JoinCVEs {
 			ports, cpes := fetchPorts(ip)
 			r.Ports = ports
 			r.CPEs = cpes
@@ -256,7 +255,7 @@ func isPrivateOrReservedIP(ip string) bool {
 		"^0\\.", "^127\\.", "^169\\.254\\.",
 		"^172\\.(1[6-9]|2[0-9]|3[0-1])\\.",
 		"^192\\.168\\.", "^10\\.",
-		"^224\\.", "^240\\.", "^281\\.", "^292\\.",
+		"^224\\.", "^240\\.", "^100\\.64\\.",
 	}
 
 	for _, pattern := range privateRanges {

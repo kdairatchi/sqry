@@ -3,16 +3,18 @@ package main
 import "testing"
 
 func TestParseFlags(t *testing.T) {
-	cfg, cve, err := parseFlags([]string{"-q", "test", "--domains", "--limit", "5", "--country", "US", "--asn", "AS123", "--httpx"})
+	cfg, cve, err := parseFlags([]string{
+		"-q", "test",
+		"--domains",
+		"--limit", "5",
+		"--country", "US",
+		"--asn", "AS123",
+		"--httpx",
+	})
 	if err != nil {
 		t.Fatalf("parseFlags error: %v", err)
 	}
 	if !cfg.Domains || cfg.Limit != 5 || cfg.Country != "US" || cfg.ASN != "AS123" || !cfg.HTTPX || cve == nil {
-	cfg, cve, err := parseFlags([]string{"-q", "test", "--domains", "--limit", "5", "--country", "US", "--asn", "AS123"})
-	if err != nil {
-		t.Fatalf("parseFlags error: %v", err)
-	}
-	if !cfg.Domains || cfg.Limit != 5 || cfg.Country != "US" || cfg.ASN != "AS123" || cve == nil {
 		t.Fatalf("unexpected config: %+v cve:%+v", cfg, cve)
 	}
 }

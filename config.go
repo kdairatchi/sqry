@@ -51,7 +51,7 @@ func parseFlags(args []string) (Config, *CVEFlags, error) {
 	fs.BoolVar(&cfg.HTTPX, "httpx", false, "Probe targets with httpx for title and screenshots")
 
 	fs.Usage = func() {
-		usage := `sqry -q <query> [options]`
+		usage := `sqry -q <query> [options]
 
 Options:
   -q string            Shodan query
@@ -88,7 +88,7 @@ Examples:
   sqry -q "nginx" --json --country US --limit 5
   sqry -q "http" --httpx --limit 20
   sqry --cve CVE-2016-10087 --cve-json --pretty
-
+`
 		fmt.Fprint(fs.Output(), usage)
 	}
 
